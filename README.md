@@ -1,5 +1,8 @@
-## Use case for this project is to automate preparation of csv datasets for AWS Quicksights. 
-<br>
+## Use case for this project is to automate preparation of csv datasets for AWS Quicksights.  
+>### Instructions:  
+>1. Place csv's in datasets directory  
+>2. Change variables to match desired values  
+>3. Terraform plan/apply
   
 ># AWS resources created   
 >>&nbsp;&nbsp;&nbsp;&nbsp;IAM role with 2 polies  

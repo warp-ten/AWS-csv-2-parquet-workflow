@@ -1,5 +1,6 @@
 ## Use case for this project is to automate preparation of csv datasets for AWS Quicksights. 
-
+<br>
+  
 ># AWS resources created   
 >>&nbsp;&nbsp;&nbsp;&nbsp;IAM role with 2 polies  
 >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AWS Managed Policy:   

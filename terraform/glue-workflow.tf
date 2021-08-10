@@ -5,7 +5,7 @@ resource "aws_glue_workflow" "csv2parquet" {
   depends_on = [
     aws_s3_bucket_object.csv2parquet_script,
     aws_glue_crawler.crawl_converted2parquet_data,
-    aws_s3_bucket_object.source_dataset
+    aws_s3_bucket_object.source_dataset,
     aws_glue_job.convert_csv2parquet
   ]
   name = "csv2parquet_${var.projectname}"

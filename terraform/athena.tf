@@ -12,9 +12,11 @@ resource "aws_athena_workgroup" "workgroup" {
 }
 
 resource "aws_athena_named_query" "foo" {
-  name      = "main_query"
+  for_each = fileset("../datasets/","*")
+  name      = "${lower(replace(replace(each.value," ","_"),".csv","_parquet"))}"
   workgroup = aws_athena_workgroup.workgroup.id
   database  = aws_glue_catalog_database.converted_parquet_catalog_database.name
   #table name can be found in the script thats uploaded in the S3.tf file. Extention is removed after conversion. 
-  query     = replace("SELECT * FROM ${var.projectname}","-","_")
+  #query     = replace("SELECT * FROM ${var.projectname}","-","_")
+  query = "SELECT * FROM ${lower(replace(replace(each.value," ","_"),".csv","_parquet"))}"
 }

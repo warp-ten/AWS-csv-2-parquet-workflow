@@ -6,12 +6,13 @@ resource "aws_glue_workflow" "csv2parquet" {
     aws_s3_bucket_object.csv2parquet_script,
     aws_glue_crawler.crawl_converted2parquet_data,
     aws_s3_bucket_object.source_dataset
+    aws_glue_job.convert_csv2parquet
   ]
   name = "csv2parquet_${var.projectname}"
 }
 
 resource "aws_glue_trigger" "on_demand_trigger" {
-  name          = "on_demand"
+  name          = "on_demand-${var.projectname}"
   type          = "ON_DEMAND"
   #enabled = true
   workflow_name = aws_glue_workflow.csv2parquet.name
@@ -22,7 +23,7 @@ resource "aws_glue_trigger" "on_demand_trigger" {
 }
 
 resource "aws_glue_trigger" "convert2parquet" {
-  name          = "trigger-csv2parquet"
+  name          = "trigger-csv2parquet-${var.projectname}"
   type          = "CONDITIONAL"
   workflow_name = aws_glue_workflow.csv2parquet.name
   predicate {
@@ -40,7 +41,7 @@ resource "aws_glue_trigger" "convert2parquet" {
 }
 
 resource "aws_glue_trigger" "crawl_convertedparquet" {
-  name          = "trigger-crawl_convertedparquet"
+  name          = "trigger-crawl_convertedparquet-${var.projectname}"
   type          = "CONDITIONAL"
   workflow_name = aws_glue_workflow.csv2parquet.name
   predicate {
